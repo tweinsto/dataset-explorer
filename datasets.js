@@ -1,13 +1,20 @@
 /***********************
- * COLLECTIONS
+ * YEAR COLLECTIONS
  ***********************/
 const YEAR_COLLECTIONS = [
-  { year: "2019", collection: "acs2019", survey: "acs_1yr" },
-  { year: "2021", collection: "acs2021", survey: "acs_1yr" },
+  { year: "2024", collection: "acs2024", survey: "acs_1yr" },
+  { year: "2023", collection: "acs2023", survey: "acs_1yr" },
   { year: "2022", collection: "acs2022", survey: "acs_1yr" },
-  { year: "2023", collection: "acs2023", survey: "acs_1yr" }
+  { year: "2021", collection: "acs2021", survey: "acs_1yr" },
+  { year: "2020", collection: "acs2020", survey: "acs_1yr" },
+  { year: "2019", collection: "acs2019", survey: "acs_1yr" },
+  { year: "2010", collection: "acs2010", survey: "acs_3yr" },
+  { year: "2008", collection: "acs2008", survey: "acs_3yr" }
 ];
 
+/***********************
+ * TREND COLLECTIONS
+ ***********************/
 const TREND_COLLECTIONS = [
   { collection: "acs2020trend" },
   { collection: "acs2016trend" },
@@ -16,158 +23,114 @@ const TREND_COLLECTIONS = [
 ];
 
 /***********************
- * BASE DATASETS (1-YEAR ACS)
+ * MASTER DATASET LIST
  ***********************/
 const BASE_DATASETS = [
 
-  // Population / Race
-  { id: "AsianPop", race: ["asian"], topic: ["population"], age: [], keywords: ["asian", "population", "race"] },
-  { id: "HispPop", race: ["hispanic"], topic: ["population"], age: [], keywords: ["hispanic", "latino", "population"] },
+  // Population
+  { id: "AsianPop", topic: ["population","race"], keywords: ["asian","population"] },
+  { id: "HispPop", topic: ["population","race"], keywords: ["hispanic","latino","population"] },
+  { id: "ImmPop", topic: ["population","immigration"], keywords: ["immigrant","foreign born","population"] },
+  { id: "PopCA", topic: ["population","geography"], keywords: ["california","population"] },
+  { id: "PopGA", topic: ["population","geography"], keywords: ["georgia","population"] },
+  { id: "PopGeo", topic: ["population","geography"], keywords: ["geographic","population"] },
+  { id: "PopMI", topic: ["population","geography"], keywords: ["michigan","population"] },
+  { id: "PopUSA", topic: ["population"], keywords: ["usa","united states","population"] },
 
-  // Children
-  { id: "ChildGrad", topic: ["education"], age: ["18-24"], keywords: ["children", "youth", "18-24", "graduation", "education"] },
-  { id: "ChildPov", topic: ["poverty"], age: ["children"], keywords: ["children", "poverty"] },
-  { id: "ChildSch", topic: ["education"], age: ["children"], keywords: ["children", "school", "attendance"] },
+  // Poverty
+  { id: "FamPov", topic: ["poverty","family"], keywords: ["family","poverty"] },
+  { id: "PopPov", topic: ["poverty", "population"], keywords: ["poverty"] },
+  { id: "PovEduc", topic: ["poverty","education"], keywords: ["poverty","education"] },
+  { id: "EldrPov", topic: ["poverty","aging"], keywords: ["elderly","poverty","65+"] },
+  { id: "ChildPov", topic: ["poverty","children"], keywords: ["children","poverty"] },
+  { id: "MarPov_W", topic: ["poverty","marital"], keywords: ["women","marriage","poverty"] },
 
-  // Cohabitation
-  { id: "Cohab_M", topic: ["family"], age: ["15+"], sex: ["male"], keywords: ["cohabitation", "male", "men", "15+"] },
-  { id: "Cohab_W", topic: ["family"], age: ["15+"], sex: ["female"], keywords: ["cohabitation", "female", "women", "15+"] },
-
-  // Professions
-  { id: "Doctors", topic: ["occupation", "health"], age: ["25-64"], keywords: ["doctors", "medical", "healthcare", "25-64"] },
-  { id: "Lawyers", topic: ["occupation", "law"], age: ["25-64"], keywords: ["lawyers", "legal", "25-64"] },
-
-  // Earnings
-  { id: "Earn", topic: ["earnings"], age: ["16+"], keywords: ["earnings", "income", "wages", "16+"] },
-  { id: "EarnAsian", race: ["asian"], topic: ["earnings"], age: ["25-34"], keywords: ["asian", "earnings", "25-34"] },
-  { id: "EarnAsianAll", race: ["asian"], topic: ["earnings"], age: ["16+"], keywords: ["asian", "earnings", "16+"] },
-  { id: "EarnHisp", race: ["hispanic"], topic: ["earnings"], age: ["25-34"], keywords: ["hispanic", "earnings", "25-34"] },
-  { id: "EarnHispAll", race: ["hispanic"], topic: ["earnings"], age: ["16+"], keywords: ["hispanic", "earnings", "16+"] },
+  // Earnings / Income
+  { id: "Earn", topic: ["earnings","income"], keywords: ["earnings","income","wages"] },
+  { id: "EarnAsian", topic: ["earnings"], keywords: ["asian","earnings"] },
+  { id: "EarnAsianAll", topic: ["earnings"], keywords: ["asian","earnings"] },
+  { id: "EarnHisp", topic: ["earnings"], keywords: ["hispanic","earnings"] },
+  { id: "EarnHispAll", topic: ["earnings"], keywords: ["hispanic","earnings"] },
 
   // Education
-  { id: "EducAsian", race: ["asian"], topic: ["education"], age: ["25-34"], keywords: ["asian", "education", "25-34"] },
-  { id: "EducAsianAll", race: ["asian"], topic: ["education"], age: ["25+"], keywords: ["asian", "education", "25+"] },
-  { id: "EducImm", topic: ["education"], age: ["25+"], keywords: ["immigrant", "education", "25+"] },
-  { id: "EducOccup", topic: ["education", "occupation"], age: ["25+"], keywords: ["education", "occupation", "25+"] },
-
-  // Elderly
-  { id: "Elderly", topic: ["population"], age: ["65+"], keywords: ["elderly", "seniors", "65+"] },
-  { id: "EldrDisab", topic: ["disability"], age: ["65+"], keywords: ["elderly", "disability", "65+"] },
-  { id: "EldrEmp", topic: ["employment"], age: ["65+"], keywords: ["elderly", "employment", "65+"] },
-  { id: "EldrHH", topic: ["households"], age: ["65+"], keywords: ["elderly", "household", "65+"] },
-  { id: "EldrPov", topic: ["poverty"], age: ["65+"], keywords: ["elderly", "poverty", "65+"] },
+  { id: "EducAsian", topic: ["education"], keywords: ["asian","education"] },
+  { id: "EducAsianAll", topic: ["education"], keywords: ["asian","education"] },
+  { id: "EducImm", topic: ["education","immigration"], keywords: ["immigrant","education"] },
+  { id: "EducOccup", topic: ["education","occupation"], keywords: ["education","occupation"] },
+  { id: "ChildGrad", topic: ["education","children"], keywords: ["children","graduation","education"] },
+  { id: "ChildSch", topic: ["education","children"], keywords: ["children","school"] },
+  { id: "EmpEduc", topic: ["education","employment"], keywords: ["education","employment"] },
+  { id: "MarEduc", topic: ["education","marital"], keywords: ["marriage","education"] },
 
   // Employment
-  { id: "EmpAsian", race: ["asian"], topic: ["employment"], age: ["16-34"], keywords: ["asian", "employment", "16-34"] },
-  { id: "EmpAsianAll", race: ["asian"], topic: ["employment"], age: ["16+"], keywords: ["asian", "employment", "16+"] },
-  { id: "EmpEduc", topic: ["employment", "education"], age: ["16+"], keywords: ["employment", "education", "16+"] },
-  { id: "EmpHisp", race: ["hispanic"], topic: ["employment"], age: ["16-34"], keywords: ["hispanic", "employment", "16-34"] },
-  { id: "EmpHispAll", race: ["hispanic"], topic: ["employment"], age: ["16+"], keywords: ["hispanic", "employment", "16+"] },
-  { id: "Employ", topic: ["employment"], age: ["16+"], keywords: ["employment", "labor force", "16+"] },
-  { id: "Emp_W", topic: ["employment"], age: ["25-34"], sex: ["female"], keywords: ["women", "employment", "25-34"] },
+  { id: "Employ", topic: ["employment","labor"], keywords: ["employment","labor force"] },
+  { id: "EmpAsian", topic: ["employment"], keywords: ["asian","employment"] },
+  { id: "EmpAsianAll", topic: ["employment"], keywords: ["asian","employment"] },
+  { id: "EmpHisp", topic: ["employment"], keywords: ["hispanic","employment"] },
+  { id: "EmpHispAll", topic: ["employment"], keywords: ["hispanic","employment"] },
+  { id: "Emp_W", topic: ["employment","gender"], keywords: ["women","employment"] },
+  { id: "EldrEmp", topic: ["employment","aging"], keywords: ["elderly","employment"] },
 
-  // Households / Housing
-  { id: "Households", topic: ["households"], age: ["15+"], keywords: ["household", "family", "15+"] },
-  { id: "Housing", topic: ["housing"], age: ["15+"], keywords: ["housing", "home", "rent", "15+"] },
-
-  // Marital
-  { id: "MarAsian", race: ["asian"], topic: ["marital"], age: ["15+"], keywords: ["asian", "marriage", "15+"] },
-  { id: "MarEduc", topic: ["marital", "education"], age: ["15+"], keywords: ["marriage", "education", "15+"] },
-  { id: "MarEmp_W", topic: ["marital", "employment"], age: ["25-34"], sex: ["female"], keywords: ["women", "marriage", "employment", "25-34"] },
-  { id: "MarHisp", race: ["hispanic"], topic: ["marital"], age: ["15+"], keywords: ["hispanic", "marriage", "15+"] },
-  { id: "MarPov_W", topic: ["marital", "poverty"], age: ["16+"], sex: ["female"], keywords: ["women", "marriage", "poverty", "16+"] },
-  { id: "Mar_M", topic: ["marital"], age: ["23-28"], sex: ["male"], keywords: ["men", "marriage", "23-28"] },
-  { id: "Mar_W", topic: ["marital"], age: ["23-28"], sex: ["female"], keywords: ["women", "marriage", "23-28"] },
+  // Marital / Family
+  { id: "MarAsian", topic: ["marital","family"], keywords: ["asian","marriage"] },
+  { id: "MarHisp", topic: ["marital","family"], keywords: ["hispanic","marriage"] },
+  { id: "Mar_M", topic: ["marital","gender"], keywords: ["men","marriage"] },
+  { id: "Mar_W", topic: ["marital","gender"], keywords: ["women","marriage"] },
+  { id: "MarEmp_W", topic: ["marital","employment"], keywords: ["women","marriage","employment"] },
+  { id: "Cohab_M", topic: ["family"], keywords: ["cohabitation","men"] },
+  { id: "Cohab_W", topic: ["family"], keywords: ["cohabitation","women"] },
+  { id: "Households", topic: ["households","family"], keywords: ["household","family"] },
 
   // Occupation
-  { id: "Occup", topic: ["occupation"], age: ["16+"], keywords: ["occupation", "jobs", "16+"] },
-  { id: "OccupAsian", race: ["asian"], topic: ["occupation"], age: ["25-34"], keywords: ["asian", "occupation", "25-34"] },
-  { id: "OccupAsianAll", race: ["asian"], topic: ["occupation"], age: ["16+"], keywords: ["asian", "occupation", "16+"] },
-  { id: "OccupHisp", race: ["hispanic"], topic: ["occupation"], age: ["24-34"], keywords: ["hispanic", "occupation", "24-34"] },
-  { id: "OccuHispAll", race: ["hispanic"], topic: ["occupation"], age: ["16+"], keywords: ["hispanic", "occupation", "16+"] },
-  { id: "OccupImm_25", topic: ["occupation"], age: ["25-34"], keywords: ["immigrant", "occupation", "25-34"] },
-  { id: "OccupImm_35", topic: ["occupation"], age: ["35-44"], keywords: ["immigrant", "occupation", "35-44"] },
+  { id: "Occup", topic: ["occupation"], keywords: ["occupation","jobs"] },
+  { id: "OccupAsian", topic: ["occupation"], keywords: ["asian","occupation"] },
+  { id: "OccupAsianAll", topic: ["occupation"], keywords: ["asian","occupation"] },
+  { id: "OccupHisp", topic: ["occupation"], keywords: ["hispanic","occupation"] },
+  { id: "OccupHispAll", topic: ["occupation"], keywords: ["hispanic","occupation"] },
+  { id: "OccupImm_25", topic: ["occupation","immigration"], keywords: ["immigrant","occupation", "immigration"] },
+  { id: "OccupImm_35", topic: ["occupation","immigration"], keywords: ["immigrant","occupation", "immigration"] },
+  { id: "Doctors", topic: ["occupation"], keywords: ["doctors","medical"] },
+  { id: "Lawyers", topic: ["occupation"], keywords: ["lawyers","legal"] },
 
-  // Poverty / Structure
-  { id: "FamPov", topic: ["poverty"], keywords: ["family", "poverty"] },
-  { id: "PovEduc", topic: ["poverty", "education"], age: ["25+"], keywords: ["poverty", "education", "25+"] },
-  { id: "PopPov", topic: ["poverty"], keywords: ["population", "poverty"] },
-  { id: "PopStruc", topic: ["population structure"], keywords: ["population structure", "age", "gender"] },
+  // Housing
+  { id: "Housing", topic: ["households"], keywords: ["housing","rent","home"] },
 
-  // Location
-  { id: "PopCA", topic: ["population"], keywords: ["california", "ca", "population"] },
-  { id: "PopGA", topic: ["population"], keywords: ["georgia", "ga", "population"] },
-  { id: "PopGeo", topic: ["population"], keywords: ["geographic", "geo", "population"] },
-  { id: "PopMI", topic: ["population"], keywords: ["michigan", "mi", "population"] },
-  { id: "PopUSA", topic: ["population"], keywords: ["usa", "united states", "population"] }
+  // Aging / Disability
+  { id: "EldrDisab", topic: ["disability","aging"], keywords: ["elderly","disability"] },
+  { id: "EldrHH", topic: ["households","aging"], keywords: ["elderly","household"] }
 ];
 
-/***********************
- * TREND DATASETS
- ***********************/
+
+
 const TREND_DATASETS = [
-  {
-    id: "educ",
-    topic: ["education"],
-    age: ["25+"],
-    keywords: ["education", "25+", "adults"]
-  },
-  {
-    id: "EducOccup",
-    topic: ["education", "occupation"],
-    age: ["16+"],
-    keywords: ["education", "occupation", "16+", "working age"]
-  },
-  {
-    id: "Elderly",
-    topic: ["population"],
-    age: ["65+"],
-    keywords: ["elderly", "aging", "65+", "seniors"]
-  },
-  {
-    id: "Employ",
-    topic: ["employment"],
-    age: ["16+"],
-    keywords: ["employment", "labor force", "16+", "working age"]
-  },
-  {
-    id: "FamPov",
-    topic: ["poverty"],
-    age: ["15+"],
-    keywords: ["family", "poverty", "15+"]
-  },
-  {
-    id: "Household",
-    topic: ["households"],
-    age: ["15+"],
-    keywords: ["household", "family", "15+"]
-  },
-  {
-    id: "Marital",
-    topic: ["marital"],
-    age: ["15+"],
-    keywords: ["marital", "marriage", "15+"]
-  },
-  {
-    id: "Pop",
-    topic: ["population"],
-    keywords: ["population"]
-  },
-  {
-    id: "PopPov",
-    topic: ["poverty"],
-    keywords: ["poverty"]
-  },
-  {
-    id: "PopStruc",
-    topic: ["population structure"],
-    keywords: ["population structure", "age", "gender"]
-  }
+  { id: "educ", topic: ["education"], keywords: ["education","trend"] },
+  { id: "EducOccup", topic: ["education","occupation"], keywords: ["education","occupation","trend"] },
+  { id: "Elderly", topic: ["aging"], keywords: ["elderly","aging","trend"] },
+  { id: "Employ", topic: ["employment"], keywords: ["employment","labor","trend"] },
+  { id: "FamPov", topic: ["poverty","family"], keywords: ["family","poverty","trend"] },
+  { id: "Household", topic: ["households","family"], keywords: ["household","family","trend"] },
+  { id: "Marital", topic: ["marital","family"], keywords: ["marriage","marital","trend"] },
+  { id: "Pop", topic: ["population"], keywords: ["population","trend"] },
+  { id: "PopPov", topic: ["poverty"], keywords: ["poverty","trend"] },
+  { id: "PopStruc", topic: ["population"], keywords: ["population structure","age","trend"] }
+];
+
+
+
+const STATE_COLLECTIONS = [
+  { year: "2008", collection: "geo2008"},
+  { year: "2010", collection: "geo2010"},
+  { year: "2012", collection: "geo2012"},
+  { year: "2016", collection: "geo2016" },
+  { year: "2020", collection: "geo2020"}, 
+  { year: "2021", collection: "geo2021"}, 
+  { year: "2023", collection: "geo2023"},
+  { year: "2024", collection: "geo2024"}
 ];
 
 
 /***********************
- * BUILD DATASETS
+ * BUILD YEAR DATASETS
  ***********************/
 const YEAR_DATASETS = YEAR_COLLECTIONS.flatMap(y =>
   BASE_DATASETS.map(d => ({
@@ -176,27 +139,99 @@ const YEAR_DATASETS = YEAR_COLLECTIONS.flatMap(y =>
     topic: (d.topic || []).map(v => v.toLowerCase()),
     age: (d.age || []).map(v => v.toLowerCase()),
     sex: (d.sex || []).map(v => v.toLowerCase()),
-    yearTag: [y.year],
+    yearTag: [String(y.year)],
     keywords: [...(d.keywords || []).map(v => v.toLowerCase()), y.year],
     year: y.year,
     collection: y.collection,
-    survey: y.survey
+    survey: y.survey,
+    collectionType: "main"   //  NEW
   }))
 );
 
-const TREND_DATASET_EXPANDED = TREND_COLLECTIONS.flatMap(t =>
-  TREND_DATASETS.map(d => ({
+/***********************
+ * BUILD TREND DATASETS
+ ***********************/
+const TREND_DATASET_EXPANDED = TREND_COLLECTIONS.flatMap(t => {
+
+  // Extract year from collection string
+  const trendYear = t.collection.match(/\d{4}/)[0];
+
+  return TREND_DATASETS.map(d => ({
     id: d.id,
-    race: [],
-    topic: (d.topic || []).map(v => v.toLowerCase()),
-    age: (d.age || []).map(v => v.toLowerCase()),
-    sex: [],
-    yearTag: ["trend"],
-    keywords: [...(d.keywords || []).map(v => v.toLowerCase()), "trend"],
-    year: "trend",
+    topic: d.topic.map(v => v.toLowerCase()),
+    yearTag: [trendYear],      //  now filterable by year
+    keywords: [...d.keywords.map(v => v.toLowerCase()), trendYear],
+    year: trendYear,           //  shows real year
     collection: t.collection,
-    survey: "trend"
-  }))
-);
+    survey: "trend",
+    collectionType: "trend"
+  }));
 
-const DATASETS = [...YEAR_DATASETS, ...TREND_DATASET_EXPANDED];
+});
+
+
+const STATES = [
+"AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL",
+"GA","HI","IA","ID","IL","IN","KS","KY","LA","MA",
+"MD","ME","MI","MN","MO","MS","MT","NC","ND","NE",
+"NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI",
+"SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
+];
+
+const STATE_NAMES = {
+  "AL":"alabama","AK":"alaska","AZ":"arizona","AR":"arkansas","CA":"california",
+  "CO":"colorado","CT":"connecticut","DE":"delaware","FL":"florida","GA":"georgia",
+  "HI":"hawaii","ID":"idaho","IL":"illinois","IN":"indiana","IA":"iowa",
+  "KS":"kansas","KY":"kentucky","LA":"louisiana","ME":"maine","MD":"maryland",
+  "MA":"massachusetts","MI":"michigan","MN":"minnesota","MS":"mississippi",
+  "MO":"missouri","MT":"montana","NE":"nebraska","NV":"nevada","NH":"new hampshire",
+  "NJ":"new jersey","NM":"new mexico","NY":"new york","NC":"north carolina",
+  "ND":"north dakota","OH":"ohio","OK":"oklahoma","OR":"oregon","PA":"pennsylvania",
+  "RI":"rhode island","SC":"south carolina","SD":"south dakota","TN":"tennessee",
+  "TX":"texas","UT":"utah","VT":"vermont","VA":"virginia","WA":"washington",
+  "WI":"wisconsin","WV":"west virginia","WY":"wyoming","DC":"district of columbia"
+};
+
+
+/***********************
+ * BUILD GEO DATASETS
+ ***********************/
+const GEO_DATASETS = STATE_COLLECTIONS.flatMap(g => {
+
+  const states = [...STATES, "STATES"];
+
+  return states.map(s => {
+
+    const stateName = STATE_NAMES[s] || "states";
+
+    return {
+      id: `Earn_${s}`,
+
+      topic: ["earnings", "employment", "geography"],
+
+      yearTag: [String(g.year)],
+
+      keywords: [
+        s.toLowerCase(),   // "mi"
+        stateName,         // "michigan"
+        g.year
+      ],
+
+      year: g.year,
+      collection: g.collection,
+      survey: "geo",
+      collectionType: "state"
+    };
+
+  });
+
+});
+
+/***********************
+ * FINAL
+ ***********************/
+const DATASETS = [
+  ...YEAR_DATASETS,
+  ...TREND_DATASET_EXPANDED,
+  ...GEO_DATASETS
+];
