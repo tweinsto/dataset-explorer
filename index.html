@@ -1,164 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Dataset Keyword Search</title>
-  <style>
-    body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  max-width: 1100px;
-  margin: 40px auto;
-  color: #1f2937;
-}
-
-h1 {
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-
-.search-panel {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-#searchBox {
-  width: 100%;
-  padding: 14px 16px;
-  font-size: 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-#searchBox:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-.filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 24px;
-}
-
-.filter-group h4 {
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.filter-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 6px;
-  cursor: pointer;
-}
-
-.filter-group input {
-  margin-right: 6px;
-}
-
-/* RESULTS */
-
-.results {
-  margin-top: 32px;
-}
-
-.dataset-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 18px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  background: #ffffff;
-}
-
-.dataset-card:hover {
-  background: #f3f4f6;
-}
-
-.dataset-id {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 14px;
-}
-
-.dataset-meta {
-  font-size: 13px;
-  color: #6b7280;
-}
-
-  </style>
+<meta charset="UTF-8">
+<title>SSDAN Dataset Explorer</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>Dataset Keyword Search</h1>
+<header>
+  <h1>SSDAN Dataset Explorer</h1>
+</header>
 
+<div class="layout">
 
-<div class="search-panel">
-  <input
-    id="searchBox"
-    placeholder="Search datasets (e.g. Poverty 2023, Education Trend)"
-  />
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
 
-  <div class="filters">
-    <div class="filter-group">
-      <h4>Race</h4>
-      <label><input type="checkbox" class="race" value="asian"> Asian</label>
-      <label><input type="checkbox" class="race" value="hispanic"> Hispanic</label>
+    <div class="filter-section">
+      <h3>Collection</h3>
+      <select id="collectionTypeSelect">
+        <option value="">All</option>
+        <option value="main">Main</option>
+        <option value="trend">Trend</option>
+        <option value="state">State Level</option>
+      </select>
     </div>
 
-    <div class="filter-group">
-      <h4>Topic</h4>
-      <label><input type="checkbox" class="topic" value="poverty"> Poverty</label>
-      <label><input type="checkbox" class="topic" value="earnings"> Earnings</label>
-      <label><input type="checkbox" class="topic" value="employment"> Employment</label>
-      <label><input type="checkbox" class="topic" value="education"> Education</label>
-      <label><input type="checkbox" class="topic" value="population"> Population</label>
+
+    <div class="filter-section">
+      <h3>Year</h3>
+
+      <select id="yearSelect">
+        <option value="">All</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2016">2016</option>
+        <option value="2010">2010</option>
+        <option value="2008">2008</option>
+      </select>
     </div>
 
-    <div class="filter-group">
-      <h4>Sex</h4>
-      <label><input type="checkbox" class="sex" value="male"> Male</label>
-      <label><input type="checkbox" class="sex" value="female"> Female</label>
+
+    <div class="filter-section">
+      <h3>Topic </h3>
+
+      <div id="topicFilters">
+
+        <button class="topic-chip" data-topic="population">Population</button>
+        <button class="topic-chip" data-topic="poverty">Poverty</button>
+        <button class="topic-chip" data-topic="earnings">Earnings</button>
+        <button class="topic-chip" data-topic="education">Education</button>
+        <button class="topic-chip" data-topic="employment">Employment</button>
+        <button class="topic-chip" data-topic="marital">Marital</button>
+        <button class="topic-chip" data-topic="family">Family</button>
+        <button class="topic-chip" data-topic="households">Households</button>
+        <button class="topic-chip" data-topic="occupation">Occupation</button>
+        <button class="topic-chip" data-topic="aging">Aging</button>
+        <button class="topic-chip" data-topic="disability">Disability</button>
+        <button class="topic-chip" data-topic="immigration">Immigration</button>
+        <button class="topic-chip" data-topic="geography">Geography</button>
+
+      </div>
+
     </div>
 
-    <div class="filter-group">
-      <h4>Year</h4>
-      <label><input type="checkbox" class="year" value="2019"> 2019</label>
-      <label><input type="checkbox" class="year" value="2021"> 2021</label>
-      <label><input type="checkbox" class="year" value="2022"> 2022</label>
-      <label><input type="checkbox" class="year" value="2023"> 2023</label>
-      <label><input type="checkbox" class="year" value="trend"> Trend</label>
+
+
+    <div class="filter-section">
+      <h3>Search</h3>
+
+      <input
+        type="text"
+        id="searchBox"
+        placeholder="Search keywords..."
+      >
     </div>
-    <div class="filter-group">
-  <h4>Age</h4>
-  <label><input type="checkbox" class="age" value="18-24"> 18–24</label>
-  <label><input type="checkbox" class="age" value="15+"> 15+</label>
-  <label><input type="checkbox" class="age" value="16+"> 16+</label>
-  <label><input type="checkbox" class="age" value="16-34"> 16–34</label>
-  <label><input type="checkbox" class="age" value="23-28"> 23–28</label>
-  <label><input type="checkbox" class="age" value="24-34"> 24–34</label>
-  <label><input type="checkbox" class="age" value="25-34"> 25–34</label>
-  <label><input type="checkbox" class="age" value="25+"> 25+</label>
-  <label><input type="checkbox" class="age" value="25-64"> 25–64</label>
-  <label><input type="checkbox" class="age" value="35-44"> 35–44</label>
-  <label><input type="checkbox" class="age" value="65+"> 65+</label>
+
+  </aside>
+
+
+  <!-- RESULTS -->
+  <main>
+
+    <div id="results"></div>
+
+  </main>
+
 </div>
-  </div>
-</div>
-
-<div id="results" class="results"></div>
-
-
-
-<div id="results" style="margin-top:32px;"></div>
 
 <script src="datasets.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
