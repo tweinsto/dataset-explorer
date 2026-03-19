@@ -93,19 +93,20 @@ main{
 
 .dataset-card{
   background:#e9e9ec;
-  padding:18px;
-  border-radius:12px;
-  border-left:5px solid #5a84f2;
+  padding:12px;            /* ↓ was 18px */
+  border-radius:10px;      /* slightly tighter */
+  border-left:4px solid #5a84f2;  /* thinner line */
 }
 
 .dataset-id{
   font-weight:600;
+  font-size:15px;   /* ↓ smaller */
 }
 
 .dataset-meta{
-  margin-top:6px;
+  margin-top:4px;
   color:#666;
-  font-size:14px;
+  font-size:12px;   /* ↓ smaller */
 }
 
 /* DATASET CARD COLORS */
