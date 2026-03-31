@@ -9,6 +9,54 @@ let userHasInteracted = false;
 
 
 /***********************
+ * UPDATE YEAR DROPDOWN
+ ***********************/
+function updateYearDropdown() {
+
+  const type = collectionTypeSelect.value;
+
+  yearSelect.innerHTML = "";
+
+  let years = [];
+
+  // no collection → all years
+  if (!type) {
+    years = DATASETS.map(d => d.year);
+  }
+
+  if (type === "main") {
+    years = YEAR_COLLECTIONS.map(d => d.year);
+  }
+
+  if (type === "trend") {
+    years = TREND_COLLECTIONS.map(d => d.collection.match(/\d{4}/)[0]);
+  }
+
+  if (type === "state") {
+    years = STATE_COLLECTIONS.map(d => d.year);
+  }
+
+  // unique + sort descending
+  years = [...new Set(years)].sort((a, b) => b - a);
+
+  // populate dropdown
+  years.forEach(y => {
+    const option = document.createElement("option");
+    option.value = y;
+    option.textContent = y;
+    yearSelect.appendChild(option);
+  });
+
+  // 🔥 KEY LOGIC
+  if (type) {
+    yearSelect.selectedIndex = 0;   // default = latest year
+  } else {
+    yearSelect.selectedIndex = -1;  // cleared state
+  }
+}
+
+
+/***********************
  * RENDER
  ***********************/
 function render(list, showMessage = false) {
@@ -59,8 +107,6 @@ function applyFilters() {
   const collectionType = collectionTypeSelect.value;
   const query = searchBox.value.toLowerCase().trim();
   const tokens = query.split(/\s+/).filter(Boolean);
-
-
 
   const filtered = DATASETS.filter(d => {
 
@@ -116,7 +162,10 @@ topicChips.forEach(chip => {
  ***********************/
 collectionTypeSelect.addEventListener("change", () => {
   userHasInteracted = true;
+
+  updateYearDropdown();   // 🔥 dynamic years
   colorCollectionMenu();
+
   applyFilters();
 });
 
@@ -136,18 +185,18 @@ searchBox.addEventListener("input", () => {
  ***********************/
 clearBtn.addEventListener("click", () => {
 
-  // 🔥 remove selection visually
-  yearSelect.selectedIndex = -1;
+  // remove selections
   collectionTypeSelect.selectedIndex = -1;
 
-  // remove color
+  updateYearDropdown();   // rebuild ALL years
+  yearSelect.selectedIndex = -1;
+
   collectionTypeSelect.classList.remove(
     "menu-main",
     "menu-trend",
     "menu-state"
   );
 
-  // reset topics
   selectedTopics = [];
   topicChips.forEach(chip => chip.classList.remove("active"));
 
@@ -182,5 +231,6 @@ function colorCollectionMenu() {
 /***********************
  * INITIAL LOAD
  ***********************/
-colorCollectionMenu();   // shows blue on load
+colorCollectionMenu();
+updateYearDropdown();   // sets 2024 for Main
 applyFilters();
