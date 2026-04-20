@@ -38,8 +38,7 @@ const BASE_DATASETS = [
   { id: "PopUSA", topic: ["population"], keywords: ["usa","united states","population"] },
 
   // Poverty
-  { id: "FamPov", topic: ["poverty","family"], keywords: ["family","poverty"] },
-  { id: "PopPov", topic: ["poverty", "population"], keywords: ["poverty"] },
+  
   { id: "PovEduc", topic: ["poverty","education"], keywords: ["poverty","education"] },
   { id: "EldrPov", topic: ["poverty","aging"], keywords: ["elderly","poverty","65+"] },
   { id: "ChildPov", topic: ["poverty","children"], keywords: ["children","poverty"] },
